@@ -1,4 +1,4 @@
-from model import Cliente, Endereco
+from model import Cliente, Endereco, Produto
 from db import addRegisters, saveSession, session, startDatabase
 from datetime import datetime
 import json
@@ -80,3 +80,22 @@ class CadastroCTRL(object):
         
         session.delete(c)
         saveSession()
+    
+    def addProduto(self, descricao):
+        p = Produto(descricao=descricao)
+        addRegisters([p])
+        saveSession()
+
+        return p.id
+
+    def getProdutos(self):
+        lp = session.query(Produto).all()
+    
+        dict_aux = {}
+        for p in lp:
+            dict_aux[p.id] = {
+                'descricao': p.descricao,
+            }
+        p_json = json.dumps(dict_aux, indent=4)
+        
+        return p

@@ -52,3 +52,29 @@ class Endereco(db.Base):
             self.logradouro, self.numero, self.bairro, 
             self.cidade, self.estado, self.id, self.cliente_id,
             self.dt_hr_manutencao)
+
+class Produto(db.Base):
+    __tablename__ = 'produto'
+    id = Column(Integer, primary_key=True)
+    descricao = Column(String, nullable=False)
+    dt_hr_manutencao = Column(DateTime, default=datetime.now,
+                              onupdate=datetime.now)
+    
+class Venda(db.Base):
+    __tablename__ = 'venda'
+    id = Column(Integer, primary_key=True)
+    dt_venda = Column(DateTime, nullable=False)
+    cliente = relationship("Cliente")
+    items = relationship("ItemVenda")
+    dt_hr_manutencao = Column(DateTime, default=datetime.now,
+                              onupdate=datetime.now)
+    
+class ItemVenda(db.Base):
+    __tablename__ = 'item_venda'
+    venda_id = Column(Integer, ForeignKey(Venda.id), primary_key=True)
+    produto_id = Column(Integer, ForeignKey(Produto.id), primary_key=True)
+    produto = relationship("Produto")
+    quantidade = Column(float, default=0.00, nullable=False)
+    valor = Column(float, default=0.00, nullable=False)
+    dt_hr_manutencao = Column(DateTime, default=datetime.now,
+                              onupdate=datetime.now)

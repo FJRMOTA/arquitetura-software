@@ -38,6 +38,25 @@ class ServerRPC(xmlrpc.XMLRPC):
 
     def xmlrpc_delCliente(self, idCliente):
         self.fachada.delCliente(idCliente)
+    
+    def xmlrpc_addProduto(self, descricao):
+        p = self.fachada.addProduto(descricao)
+        return p
+   
+    def xmlrpc_getProdutos(self):
+        pass
+   
+    def xmlrpc_iniciarVenda(self, idCliente):
+        pass
+   
+    def xmlrpc_addItemVenda(self, idVenda, idProduto, qtde, valor):
+        pass
+   
+    def xmlrpc_getValorTotalVenda(self, idVenda):
+        pass
+   
+    def xmlrpc_finalizarVenda(self, idVenda):
+        pass
 
 #TODO add exception handler and log
 #TODO add security layer for clients apps authentication

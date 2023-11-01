@@ -28,6 +28,27 @@ class ClienteRPC(object):
 
     def delCliente(self, idCliente):
         c = self.server.delCliente(idCliente)
+    
+    def addProduto(self, idCliente):
+        p = self.server.addProduto(descricao)
+   
+    def getProdutos(self):
+        p = self.server.getProdutos()
+        return p
+   
+    def iniciarVenda(self, idCliente):
+        idVenda = self.server.iniciarVenda(idCliente)
+        return idVenda
+   
+    def addItemVenda(self, idVenda, idProduto, qtde, valor):
+        self.server.addItemVenda(idVenda, idProduto, qtde, valor)
+       
+    def getVrTotalVenda(self, idVenda):
+        vt = self.server.getVrTotalVenda(idVenda)
+        return vt
+   
+    def finalizarVenda(self, idVenda):
+        self.server.finalizarVenda(idVenda)
         
 if __name__ == "__main__":
      
